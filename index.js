@@ -262,6 +262,21 @@ app.put("/MonthlyStreak/:id", async (req, res) => {
         res.status(500).json({ error: "Error updating Monthly streak" })
     }
 })
+
+app.put("/currentData/:Name",async(req,res)=>{
+    try{
+        const name = req.params.Name;
+        const currentData = req.body.currentData;
+        const user = await User.updateOne({Name:name},{currentData:currentData},{new:false});
+        res.status(200).json({ currentData: user.currentData })
+
+    }
+    catch (error) {
+        console.log("Error updating currenData ", error)
+        res.status(500).json({ error: "Error updating currentData" })
+    }
+})
+
 app.listen(port, () => {
     try {
         console.log("Sever Started successfully on port 3000")
