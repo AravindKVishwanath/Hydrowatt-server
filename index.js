@@ -285,7 +285,7 @@ app.put("/currentData/:Name",async(req,res)=>{
         )
         console.log(newUserData)
         await newUserData.save();
-        res.status(200).json({ currentData: user.powerData })
+        res.status(200).message({ currentData: user.powerData })
         }
     }
     catch (error) {
@@ -293,6 +293,19 @@ app.put("/currentData/:Name",async(req,res)=>{
         res.status(500).json({ error: "Error updating currentData" })
     }
 })
+
+//for getting array of current objects
+app.get("/getCurrentData/:Name", async(req,res)=>{
+    const name = req.params.Name;
+    try{
+        const userData = await UserData.findOne({Name:name})
+        console.log(userData.powerData)
+        res.status(200).json({currentData:userData.powerData})
+    }catch(err){
+        console.log(err)
+    }
+})
+
 
 app.listen(port, () => {
     try {
