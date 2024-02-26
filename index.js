@@ -14,6 +14,7 @@ const port = 3000;
 const cors = require('cors')
 const bodyParser = require('body-parser')
 const jwt = require('jsonwebtoken')
+const UserData = require('./models/userData')
 
 app.use(cors())
 app.use(bodyParser.urlencoded({ extended: false }));
@@ -267,7 +268,7 @@ app.put("/currentData/:Name",async(req,res)=>{
     try{
         const name = req.params.Name;
         const currentData = req.body.currentData;
-        const user = await User.updateOne({Name:name},{currentData:currentData},{new:false});
+        const user = await UserData.updateOne({Name:name},{currentData:currentData},{new:false});
         res.status(200).json({ currentData: user.currentData })
 
     }
