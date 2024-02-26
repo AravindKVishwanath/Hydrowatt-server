@@ -269,7 +269,7 @@ app.put("/currentData/:Name",async(req,res)=>{
         const name = req.params.Name;
         const currentData = req.body.powerData;
         console.log(currentData)
-        const user = await UserData.findOneAndUpdate({Name:name},{powerData:currentData},{new:true});
+        const user = await UserData.findOneAndUpdate({Name:name},{powerData:currentData},{new:false});
         if(user){
             res.status(200).json({ currentData: user.powerData })
         }
