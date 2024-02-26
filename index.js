@@ -279,9 +279,9 @@ app.put("/currentData/:Name",async(req,res)=>{
         }
         else{
         const newUserData = new UserData(
-            { Name: name },
-            { $push: { powerData: currentData } },
-            { new: true }
+            {Name: name ,
+             powerData: currentData ,
+             new: true }
         )
         console.log(newUserData)
         await newUserData.save();
