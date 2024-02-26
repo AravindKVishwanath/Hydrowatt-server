@@ -269,6 +269,11 @@ app.put("/currentData/:Name",async(req,res)=>{
         const name = req.params.Name;
         const currentData = req.body.currentData;
         const user = await UserData.updateOne({Name:name},{currentData:currentData},{new:false});
+        if(user){
+            res.status(200).json({ currentData: user.currentData })
+        }
+        const newUserData = new UserData({name, currentData})
+        await newUserData.save();
         res.status(200).json({ currentData: user.currentData })
 
     }
