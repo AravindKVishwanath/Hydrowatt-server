@@ -267,15 +267,18 @@ app.put("/MonthlyStreak/:id", async (req, res) => {
 app.put("/currentData/:Name",async(req,res)=>{
     try{
         const name = req.params.Name;
-        const currentData = req.body.currentData;
-        const user = await UserData.updateOne({Name:name},{currentData:currentData},{new:false});
+        const currentData = req.body.powerData;
+        console.log(currentData)
+        const user = await UserData.findOneAndUpdate({Name:name},{powerData:currentData},{new:true});
         if(user){
-            res.status(200).json({ currentData: user.currentData })
+            res.status(200).json({ currentData: user.powerData })
         }
-        const newUserData = new UserData({Name:name, currentData: currentData})
+        else{
+            const newUserData = new UserData({Name:name, powerData: currentData})
+        console.log(newUserData)
         await newUserData.save();
-        res.status(200).json({ currentData: user.currentData })
-
+        res.status(200).json({ currentData: user.powerData })
+        }
     }
     catch (error) {
         console.log("Error updating currenData ", error)
