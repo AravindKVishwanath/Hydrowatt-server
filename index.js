@@ -272,7 +272,7 @@ app.put("/currentData/:Name",async(req,res)=>{
         if(user){
             res.status(200).json({ currentData: user.currentData })
         }
-        const newUserData = new UserData({name, currentData})
+        const newUserData = new UserData({Name:name, currentData: currentData})
         await newUserData.save();
         res.status(200).json({ currentData: user.currentData })
 
