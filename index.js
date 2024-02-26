@@ -269,12 +269,20 @@ app.put("/currentData/:Name",async(req,res)=>{
         const name = req.params.Name;
         const currentData = req.body.powerData;
         console.log(currentData)
-        const user = await UserData.findOneAndUpdate({Name:name},{powerData:currentData},{new:true});
+        const user = await UserData.findOneAndUpdate(
+            { Name: name },
+            { $push: { powerData: currentData } },
+            { new: true }
+        );
         if(user){
             res.status(200).json({ currentData: user.powerData })
         }
         else{
-        const newUserData = new UserData({Name:name, powerData: currentData})
+        const newUserData = new UserData(
+            { Name: name },
+            { $push: { powerData: currentData } },
+            { new: true }
+        )
         console.log(newUserData)
         await newUserData.save();
         res.status(200).json({ currentData: user.powerData })
