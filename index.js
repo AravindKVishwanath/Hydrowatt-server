@@ -271,7 +271,7 @@ app.put("/currentData/:Name",async(req,res)=>{
         console.log(currentData)
         const user = await User.findOneAndUpdate(
             {Name: name },
-            {powerData: currentData} ,
+            {$push:{powerData: currentData}} ,
             {new:true}
         );
         if(user){
