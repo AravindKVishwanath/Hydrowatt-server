@@ -41,6 +41,14 @@ const userSchema = new mongoose.Schema({
         type:Number,
         default:0,
     },
+    powerData : {
+        type:[],
+        default:""
+    },
+    waterData : {
+        type : [],
+        default:""
+    },
     verificationToken:String,
 })
 

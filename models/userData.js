@@ -6,10 +6,6 @@ const userDataSchema  = new mongoose.Schema({
         unique:true,
         required:true,
     },
-    userId:{
-        type : String,
-        unique:true,
-    },
     powerData : {
         type:[],
         default:""

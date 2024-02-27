@@ -269,7 +269,7 @@ app.put("/currentData/:Name",async(req,res)=>{
         const name = req.params.Name;
         const currentData = req.body;
         console.log(currentData)
-        const user = await UserData.findOneAndUpdate(
+        const user = await User.findOneAndUpdate(
             {Name: name },
             {powerData: currentData} ,
             {new:true}
@@ -278,7 +278,7 @@ app.put("/currentData/:Name",async(req,res)=>{
             res.status(200).json({ currentData: user.powerData })
         }
         else{
-        const newUserData = new UserData(
+        const newUserData = new User(
             {Name: name },
             {powerData: currentData} ,
             {new:true}
@@ -298,7 +298,7 @@ app.put("/currentData/:Name",async(req,res)=>{
 app.get("/getCurrentData/:Name", async(req,res)=>{
     const name = req.params.Name;
     try{
-        const userData = await UserData.findOne({Name:name})
+        const userData = await User.findOne({Name:name})
         console.log(userData.powerData)
         res.status(200).json({currentData:userData.powerData})
     }catch(err){
