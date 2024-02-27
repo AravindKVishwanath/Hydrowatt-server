@@ -294,6 +294,36 @@ app.put("/currentData/:Name",async(req,res)=>{
     }
 })
 
+app.put("/waterData/:Name",async(req,res)=>{
+    try{
+        const name = req.params.Name;
+        const waterData = req.body;
+        console.log(waterData)
+        const user = await User.findOneAndUpdate(
+            {Name: name },
+            {$push:{waterData: waterData}} ,
+            {new:true}
+        );
+        if(user){
+            res.status(200).json({ waterData: user.waterData })
+        }
+        else{
+        const newUserData = new User(
+            {Name: name },
+            {waterData: waterData} ,
+            {new:true}
+        )
+        console.log(newUserData)
+        await newUserData.save();
+        res.status(200).message({ waterData: user.waterData })
+        }
+    }
+    catch (error) {
+        console.log("Error updating currenData ", error)
+        res.status(500).json({ error: "Error updating currentData" })
+    }
+})
+
 //for getting array of current objects
 app.get("/getCurrentData/:Name", async(req,res)=>{
     const name = req.params.Name;
@@ -301,6 +331,17 @@ app.get("/getCurrentData/:Name", async(req,res)=>{
         const userData = await User.findOne({Name:name})
         console.log(userData.powerData)
         res.status(200).json({currentData:userData.powerData})
+    }catch(err){
+        console.log(err)
+    }
+})
+
+app.get("/getwaterData/:Name", async(req,res)=>{
+    const name = req.params.Name;
+    try{
+        const userData = await User.findOne({Name:name})
+        console.log(userData.waterData)
+        res.status(200).json({waterData:userData.waterData})
     }catch(err){
         console.log(err)
     }
