@@ -267,7 +267,7 @@ app.put("/MonthlyStreak/:id", async (req, res) => {
 app.put("/currentData/:Name",async(req,res)=>{
     try{
         const name = req.params.Name;
-        const currentData = req.body.powerData;
+        const currentData = req.body;
         console.log(currentData)
         const user = await UserData.findOneAndUpdate(
             {Name: name },
