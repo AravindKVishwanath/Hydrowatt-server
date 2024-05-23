@@ -35,6 +35,7 @@ app.get("/", async (req, res) => {
             Hello: "Welcome to ElectrocodeInnovators' Hydrowatt!!",
             message: "Aiming to mindfully build a greener future By managing your Electricity and Water Consumptions"
         })
+       // res.sendFile(__dirname + '/index.html');
     } catch (error) {
         res.status(404)
         console.log("Root error", error)
