@@ -204,6 +204,16 @@ app.put("/WaterConsumptionGoal/:id", async (req, res) => {
     }
 });
 
+app.get("/WaterConsumptionGoal/:id",async(req,res)=>{
+    try{
+        const id = req.params.id
+        const user = await User.findById({_id:id})
+        res.send(user.WaterConsumptionGoal)
+    }catch(err){
+        res.send(500)
+    }
+})
+
 //updating th Electricity Monitoring goals in the user profile
 app.put("/ElectricityConsumptionGoal/:id", async (req, res) => {
     try {
@@ -215,6 +225,16 @@ app.put("/ElectricityConsumptionGoal/:id", async (req, res) => {
     } catch (error) {
         console.log("ElectricityConsumptionGoal error", error)
         res.status(500).json({ message: "Error in Updating the ElectricityConsumptionGoal" })
+    }
+})
+
+app.get("/ElectricityConsumptionGoal/:id",async(req,res)=>{
+    try{
+        const id = req.params.id
+        const user = await User.findById({_id:id})
+        res.send(user.ElectricityConsumptionGoal)
+    }catch(err){
+        res.send(500)
     }
 })
 
