@@ -224,7 +224,7 @@ app.put("/ElectricityConsumptionGoal/:id", async (req, res) => {
         res.status(200).json(user)
     } catch (error) {
         console.log("ElectricityConsumptionGoal error", error)
-        res.status(500).json({ message: "Error in Updating the ElectricityConsumptionGoal" })
+        res.status(500).json({ message: "Error in Updating the Electricity Consumption Goal" })
     }
 })
 
